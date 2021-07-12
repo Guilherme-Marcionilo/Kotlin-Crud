@@ -1,8 +1,8 @@
 package br.com.zup
 
-import br.com.zup.pub.Toy
-import br.com.zup.pub.ToyRepository
-import br.com.zup.pub.ToyRequest
+import br.com.zup.model.Toy
+import br.com.zup.repository.ToyRepository
+import br.com.zup.model.ToyRequest
 import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.matchers.shouldBe
 import io.micronaut.test.extensions.kotest.annotation.MicronautTest
@@ -11,6 +11,7 @@ import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
+import io.mockk.verify
 
 
 @MicronautTest
@@ -32,20 +33,11 @@ class ToyControllerTest: AnnotationSpec() {
 
     @Test
     fun `should return toy with success`() {
-        every { toyRequest.toModel() } returns toy
+
+        toy = Toy("Brinquedo", 12.90)
 
         val result = toyRequest.toModel()
 
-        result shouldBe toyRequest
+        result.id shouldBe toy.id
     }
-
-    @Test
-    fun `should create toy with success`() {
-        every { toyRepository.save(any()) } returns toy
-
-        val result = toy
-
-        result shouldBe toyRequest
-    }
-
 }

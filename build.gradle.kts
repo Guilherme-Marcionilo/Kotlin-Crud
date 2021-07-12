@@ -53,8 +53,7 @@ dependencies {
     implementation("io.micronaut:micronaut-validation")
     runtime("io.micronaut.sql:micronaut-jdbc-hikari")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
-    testImplementation("io.kotest:kotest-runner-junit5:{version}")
-    testImplementation("io.kotest:kotest-extensions-spring:{version}")
+    testImplementation("io.mockk:mockk:1.10.6")
 
 }
 
