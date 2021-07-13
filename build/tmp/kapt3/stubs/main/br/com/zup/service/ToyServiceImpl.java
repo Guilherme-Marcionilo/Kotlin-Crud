@@ -10,6 +10,19 @@ public final class ToyServiceImpl implements br.com.zup.service.ToyService {
     
     @org.jetbrains.annotations.NotNull()
     @java.lang.Override()
+    public java.util.List<br.com.zup.model.Toy> getAllToys(@org.jetbrains.annotations.NotNull()
+    java.lang.String name) {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    @java.lang.Override()
+    public java.util.Optional<br.com.zup.model.Toy> getToyById(long id) {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    @java.lang.Override()
     public br.com.zup.model.Toy createToy(@org.jetbrains.annotations.NotNull()
     br.com.zup.model.Toy toy) {
         return null;
@@ -24,19 +37,6 @@ public final class ToyServiceImpl implements br.com.zup.service.ToyService {
     
     @java.lang.Override()
     public void deleteToyById(long id) {
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    @java.lang.Override()
-    public java.util.List<br.com.zup.model.Toy> getAllToys(@org.jetbrains.annotations.NotNull()
-    java.lang.String name) {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    @java.lang.Override()
-    public java.util.Optional<br.com.zup.model.Toy> getToyById(long id) {
-        return null;
     }
     
     public ToyServiceImpl(@org.jetbrains.annotations.NotNull()

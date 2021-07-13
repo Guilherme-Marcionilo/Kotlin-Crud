@@ -7,6 +7,13 @@ import java.lang.System;
 public abstract interface ToyService {
     
     @org.jetbrains.annotations.NotNull()
+    public abstract java.util.List<br.com.zup.model.Toy> getAllToys(@org.jetbrains.annotations.NotNull()
+    java.lang.String name);
+    
+    @org.jetbrains.annotations.NotNull()
+    public abstract java.util.Optional<br.com.zup.model.Toy> getToyById(long id);
+    
+    @org.jetbrains.annotations.NotNull()
     public abstract br.com.zup.model.Toy createToy(@org.jetbrains.annotations.NotNull()
     br.com.zup.model.Toy toy);
     
@@ -15,11 +22,4 @@ public abstract interface ToyService {
     java.lang.String name);
     
     public abstract void deleteToyById(long id);
-    
-    @org.jetbrains.annotations.NotNull()
-    public abstract java.util.List<br.com.zup.model.Toy> getAllToys(@org.jetbrains.annotations.NotNull()
-    java.lang.String name);
-    
-    @org.jetbrains.annotations.NotNull()
-    public abstract java.util.Optional<br.com.zup.model.Toy> getToyById(long id);
 }
