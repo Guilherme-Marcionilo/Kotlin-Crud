@@ -11,6 +11,14 @@ class ToyServiceImpl(private val toyRepository: ToyRepository) : ToyService {
 
     private val log = LoggerFactory.getLogger(this::class.java)
 
+    override fun getAllToys(name: String): List<Toy> {
+        return toyRepository.findAll()
+    }
+
+    override fun getToyById(id: Long): Optional<Toy> {
+        return toyRepository.findById(id)
+    }
+
     override fun createToy(toy: Toy): Toy {
         log.info("Toy Created!")
         return toyRepository.save(toy)
@@ -29,14 +37,4 @@ class ToyServiceImpl(private val toyRepository: ToyRepository) : ToyService {
     override fun deleteToyById(id: Long) {
        return toyRepository.deleteById(id)
     }
-
-    override fun getAllToys(name: String): List<Toy> {
-        return toyRepository.findAll()
-    }
-
-    override fun getToyById(id: Long): Optional<Toy> {
-        return toyRepository.findById(id)
-    }
-
-
 }

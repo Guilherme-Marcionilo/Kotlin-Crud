@@ -1,9 +1,8 @@
 package br.com.zup.controller
 
 import br.com.zup.model.Toy
-import br.com.zup.model.ToyRequest
+import br.com.zup.model.ToyDto
 import br.com.zup.service.ToyService
-import br.com.zup.service.ToyServiceImpl
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Body
@@ -50,10 +49,10 @@ class ToyController(@Inject val toyService: ToyService) {
 
     @Post
     @Produces(MediaType.APPLICATION_JSON)
-    fun createToy(@Body @Valid request: ToyRequest): HttpResponse<Toy> {
+    fun createToy(@Body @Valid dto: ToyDto): HttpResponse<Toy> {
 
         log.info("Criando um Toy")
-        val saved = toyService.createToy(ToyConverter.toyDtoToToy(request))
+        val saved = toyService.createToy(ToyConverter.toyDtoToToy(dto))
 
         return HttpResponse.created(saved)
     }
@@ -62,6 +61,7 @@ class ToyController(@Inject val toyService: ToyService) {
     fun updateToy(@PathVariable id: Long, name: String): HttpResponse<Toy> {
         log.info("Atualizando Toy")
         val updated = toyService.updateToy(id, name)
+
         return HttpResponse.ok(updated)
     }
 

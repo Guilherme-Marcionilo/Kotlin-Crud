@@ -7,7 +7,7 @@ import javax.validation.constraints.Positive
 import javax.validation.constraints.Size
 
 @Introspected
-data class ToyRequest(
+data class ToyDto(
     @field:NotBlank
     @field:Size(max = 50)
     val name: String,
