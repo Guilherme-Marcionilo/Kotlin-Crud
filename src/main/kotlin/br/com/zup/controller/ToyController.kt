@@ -2,6 +2,7 @@ package br.com.zup.controller
 
 import br.com.zup.model.Toy
 import br.com.zup.model.ToyRequest
+import br.com.zup.service.ToyService
 import br.com.zup.service.ToyServiceImpl
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
@@ -21,7 +22,7 @@ import javax.validation.Valid
 
 @Validated
 @Controller("/toy")
-class ToyController(@Inject val toyServiceImpl: ToyServiceImpl) {
+class ToyController(@Inject val toyService: ToyService) {
 
     private val log = LoggerFactory.getLogger(this::class.java)
 
@@ -30,10 +31,9 @@ class ToyController(@Inject val toyServiceImpl: ToyServiceImpl) {
     fun getAllToys(@QueryValue(defaultValue = "") name: String): HttpResponse<List<Toy>> {
 
         log.info("Listando Toy's")
-        val listToy = toyServiceImpl.getAllToys(name)
+        val listToy = toyService.getAllToys(name)
 
         return HttpResponse.ok(listToy)
-
     }
 
     @Get("/{id}")
@@ -41,7 +41,7 @@ class ToyController(@Inject val toyServiceImpl: ToyServiceImpl) {
 
         log.info("Listando Toy's por ID")
 
-        val possibleToy = toyServiceImpl.getToyById(id)
+        val possibleToy = toyService.getToyById(id)
 
         return HttpResponse.ok(possibleToy)
 
@@ -53,22 +53,22 @@ class ToyController(@Inject val toyServiceImpl: ToyServiceImpl) {
     fun createToy(@Body @Valid request: ToyRequest): HttpResponse<Toy> {
 
         log.info("Criando um Toy")
-        val saved = toyServiceImpl.createToy(ToyConverter.toyDtoToToy(request))
+        val saved = toyService.createToy(ToyConverter.toyDtoToToy(request))
 
         return HttpResponse.created(saved)
     }
 
     @Put("/{id}")
-    fun updateToy(@PathVariable id: Long, @Body @Valid request: ToyRequest): HttpResponse<Toy> {
+    fun updateToy(@PathVariable id: Long, name: String): HttpResponse<Toy> {
         log.info("Atualizando Toy")
-        val updated = toyServiceImpl.updateToy(ToyConverter.toyPutDtoToToy(id, request))
+        val updated = toyService.updateToy(id, name)
         return HttpResponse.ok(updated)
     }
 
     @Delete("/{id}")
     fun deleteToy(@PathVariable id: Long) {
         log.info("Deletando Toy")
-        return toyServiceImpl.deleteToyById(id)
+        return toyService.deleteToyById(id)
     }
 
 }

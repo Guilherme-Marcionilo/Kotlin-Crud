@@ -1,6 +1,7 @@
 package br.com.zup.service
 
 import br.com.zup.model.Toy
+import br.com.zup.model.ToyRequest
 import java.util.*
 import javax.inject.Singleton
 
@@ -9,7 +10,7 @@ interface ToyService {
 
     fun createToy(toy: Toy): Toy
 
-    fun updateToy(toy: Toy): Toy
+    fun updateToy(id: Long, name: String): Toy
 
     fun deleteToyById(id: Long)
 

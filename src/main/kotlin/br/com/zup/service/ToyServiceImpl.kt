@@ -16,8 +16,14 @@ class ToyServiceImpl(private val toyRepository: ToyRepository) : ToyService {
         return toyRepository.save(toy)
     }
 
-    override fun updateToy(toy: Toy): Toy {
-        return toyRepository.update(toy)
+    override fun updateToy(id: Long, name: String): Toy {
+        val possibleToy = toyRepository.findById(id)
+
+        val toy = possibleToy.get()
+
+        toy.name = name
+        toyRepository.update(toy)
+        return toy
     }
 
     override fun deleteToyById(id: Long) {
