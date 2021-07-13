@@ -10,9 +10,8 @@ import kotlin.random.Random
 @Entity
 class Toy(
     var name: String,
-    val price: BigDecimal
-){
+    val price: BigDecimal,
     @Id
     @GeneratedValue
     var id: Long? = null
-}
+)

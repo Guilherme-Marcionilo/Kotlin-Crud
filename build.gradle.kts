@@ -54,6 +54,7 @@ dependencies {
     runtime("io.micronaut.sql:micronaut-jdbc-hikari")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     testImplementation("io.mockk:mockk:1.10.6")
+    implementation("io.micronaut:micronaut-management")
 
 }
 

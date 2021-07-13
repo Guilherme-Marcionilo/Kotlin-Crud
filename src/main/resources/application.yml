@@ -9,3 +9,7 @@ datasources:
     password: ''
     dialect: H2
 jpa.default.properties.hibernate.hbm2ddl.auto: update
+
+endpoints:
+  health:
+    enabled: true
