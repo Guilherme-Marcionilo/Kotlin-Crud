@@ -1,7 +1,7 @@
 package br.com.zup.model
 
-import br.com.zup.model.Toy
 import io.micronaut.core.annotation.Introspected
+import java.math.BigDecimal
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Positive
 import javax.validation.constraints.Size
@@ -15,10 +15,5 @@ data class ToyRequest(
     @field:NotBlank
     @field:Size(max = 50)
     @field:Positive
-    val price: Double
-) {
-
-    fun toModel(): Toy {
-        return Toy(name, price)
-    }
-}
+    val price: BigDecimal
+)

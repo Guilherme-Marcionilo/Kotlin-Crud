@@ -1,9 +1,7 @@
 package br.com.zup.controller
 
 import br.com.zup.model.Toy
-import br.com.zup.model.ToyDetailsResponse
 import br.com.zup.model.ToyRequest
-import br.com.zup.repository.ToyRepository
 import br.com.zup.service.ToyServiceImpl
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
@@ -18,90 +16,58 @@ import io.micronaut.http.annotation.Put
 import io.micronaut.http.annotation.QueryValue
 import io.micronaut.validation.Validated
 import org.slf4j.LoggerFactory
-import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.ResponseStatus
 import javax.inject.Inject
-import javax.transaction.Transactional
 import javax.validation.Valid
 
 @Validated
 @Controller("/toy")
-class ToyController(@Inject val toyRepository: ToyRepository, @Inject val toyServiceImpl: ToyServiceImpl) {
+class ToyController(@Inject val toyServiceImpl: ToyServiceImpl) {
 
     private val log = LoggerFactory.getLogger(this::class.java)
 
     @Get
-    @Transactional
     @Produces(MediaType.APPLICATION_JSON)
-    fun getAllToys(@QueryValue(defaultValue = "") name: String): HttpResponse<Any> {
+    fun getAllToys(@QueryValue(defaultValue = "") name: String): HttpResponse<List<Toy>> {
 
-        if (name.isBlank()) {
+        log.info("Listando Toy's")
+        val listToy = toyServiceImpl.getAllToys(name)
 
-            val listToys = toyRepository.findAll()
-
-            val answer = listToys.map { toy -> ToyDetailsResponse(toy) }
-
-            return HttpResponse.ok(answer)
-        }
-
-       val possibleToy =  toyRepository.findByName(name)
-
-       if (possibleToy.isEmpty) {
-           return HttpResponse.notFound()
-       }
-
-       val toy = possibleToy.get()
-
-       return HttpResponse.ok(ToyDetailsResponse(toy))
+        return HttpResponse.ok(listToy)
 
     }
 
     @Get("/{id}")
-    @Transactional
-    fun getToyById(@PathVariable id: Long) : HttpResponse<Any>{
-        val possibleToy = toyRepository.findById(id)
+    fun getToyById(@PathVariable id: Long): HttpResponse<Any> {
 
-        if (possibleToy.isPresent) {
-            return HttpResponse.ok(possibleToy)
-        }
-        return HttpResponse.notFound()
+        log.info("Listando Toy's por ID")
+
+        val possibleToy = toyServiceImpl.getToyById(id)
+
+        return HttpResponse.ok(possibleToy)
+
     }
 
 
     @Post
-    @Transactional
     @Produces(MediaType.APPLICATION_JSON)
-    @ResponseStatus(HttpStatus.CREATED)
-    fun createToy(@Body @Valid request: ToyRequest): Toy {
+    fun createToy(@Body @Valid request: ToyRequest): HttpResponse<Toy> {
 
         log.info("Criando um Toy")
-        val toy = request.toModel()
+        val saved = toyServiceImpl.createToy(ToyConverter.toyDtoToToy(request))
 
-        return toyServiceImpl.createToy(toy)
+        return HttpResponse.created(saved)
     }
 
     @Put("/{id}")
-    @Transactional
-    fun updateToy(@PathVariable id: Long, name: String): HttpResponse<Any> {
-
-        val possibleToy = toyRepository.findById(id)
-
-        if (possibleToy.isEmpty) {
-            return HttpResponse.notFound()
-        }
-
-        val toy = possibleToy.get()
-        toy.name = name
-
-        toyRepository.update(toy)
-
-        return HttpResponse.ok(ToyDetailsResponse(toy))
-
+    fun updateToy(@PathVariable id: Long, @Body @Valid request: ToyRequest): HttpResponse<Toy> {
+        log.info("Atualizando Toy")
+        val updated = toyServiceImpl.updateToy(ToyConverter.toyPutDtoToToy(id, request))
+        return HttpResponse.ok(updated)
     }
 
     @Delete("/{id}")
-    @Transactional
     fun deleteToy(@PathVariable id: Long) {
+        log.info("Deletando Toy")
         return toyServiceImpl.deleteToyById(id)
     }
 
