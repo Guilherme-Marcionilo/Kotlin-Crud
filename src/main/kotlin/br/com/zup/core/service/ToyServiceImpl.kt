@@ -8,7 +8,7 @@ import java.util.*
 import javax.inject.Singleton
 
 @Singleton
-class ToyService(private val toyRepository: ToyRepositoryPort): ToyServicePort {
+class ToyServiceImpl(private val toyRepository: ToyRepositoryPort): ToyServicePort {
 
     override fun create(toy: Toy) = toyRepository.save(ToyConverter.toEntity(toy))
 

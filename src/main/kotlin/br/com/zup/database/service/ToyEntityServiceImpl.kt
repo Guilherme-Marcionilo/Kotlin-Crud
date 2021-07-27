@@ -9,7 +9,7 @@ import java.util.*
 import javax.inject.Singleton
 
 @Singleton
-class ToyEntityService(private val toyEntityRepository: ToyEntityRepository) : ToyRepositoryPort {
+class ToyEntityServiceImpl(private val toyEntityRepository: ToyEntityRepository) : ToyRepositoryPort {
 
     override fun save(toyEntity: ToyEntity) = ToyConverter.toToy(toyEntityRepository.save(toyEntity))
 
