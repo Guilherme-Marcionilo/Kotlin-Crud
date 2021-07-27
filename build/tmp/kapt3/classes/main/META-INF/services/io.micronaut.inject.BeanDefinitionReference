@@ -1,4 +1,5 @@
-br.com.zup.service.$ToyServiceImplDefinitionClass
-br.com.zup.controller.$$ToyControllerDefinition$InterceptedDefinitionClass
-br.com.zup.controller.$ToyControllerDefinitionClass
-br.com.zup.repository.$ToyRepository$InterceptedDefinitionClass
+br.com.zup.database.service.$ToyEntityServiceDefinitionClass
+br.com.zup.entrypoint.controller.$ToyControllerDefinitionClass
+br.com.zup.core.service.$ToyServiceDefinitionClass
+br.com.zup.entrypoint.controller.$$ToyControllerDefinition$InterceptedDefinitionClass
+br.com.zup.database.repository.$ToyEntityRepositoryScyllaDBDefinitionClass

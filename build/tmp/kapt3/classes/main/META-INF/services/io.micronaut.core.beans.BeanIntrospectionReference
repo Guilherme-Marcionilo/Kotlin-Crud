@@ -1,2 +1,2 @@
-br.com.zup.model.$ToyDto$IntrospectionRef
-br.com.zup.model.$Toy$IntrospectionRef
+br.com.zup.database.entity.$ToyEntity$IntrospectionRef
+br.com.zup.entrypoint.dto.$ToyDto$IntrospectionRef

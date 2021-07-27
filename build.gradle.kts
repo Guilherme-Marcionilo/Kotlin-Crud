@@ -31,10 +31,7 @@ micronaut {
 
 dependencies {
     kapt("io.micronaut.data:micronaut-data-processor")
-    kapt("io.micronaut.spring:micronaut-spring-annotation")
-    kapt("io.micronaut.spring:micronaut-spring-web-annotation")
     implementation("io.micronaut:micronaut-http-client")
-    implementation("io.micronaut:micronaut-http-server")
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
@@ -42,19 +39,13 @@ dependencies {
     implementation("javax.annotation:javax.annotation-api")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("io.micronaut.sql:micronaut-hibernate-jpa")
     runtimeOnly("ch.qos.logback:logback-classic")
-    compile("com.h2database:h2")
-    runtimeOnly("io.micronaut.spring:micronaut-spring-web")
-    kaptTest("io.micronaut.spring:micronaut-spring-annotation")
-    kaptTest("io.micronaut.spring:micronaut-spring-web-annotation")
     implementation("io.micronaut:micronaut-validation")
-    runtime("io.micronaut.sql:micronaut-jdbc-hikari")
-    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
-    testImplementation("io.mockk:mockk:1.10.6")
     implementation("io.micronaut:micronaut-management")
+    implementation("io.micronaut.cassandra:micronaut-cassandra")
+
+
+    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 }
 
