@@ -3,14 +3,13 @@ package br.com.zup.database.repository
 import br.com.zup.database.entity.ToyEntity
 import com.datastax.oss.driver.api.core.CqlSession
 import com.datastax.oss.driver.api.core.cql.SimpleStatement
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.util.*
 import javax.inject.Singleton
 
 @Singleton
-class ToyEntityRepositoryScyllaDB(private val cqlSession: CqlSession) : ToyEntityRepository {
+class ToyEntityRepositoryScyllaImpl(private val cqlSession: CqlSession) : ToyEntityRepository {
 
     private val LOG: Logger = LoggerFactory.getLogger(this::class.java)
 
