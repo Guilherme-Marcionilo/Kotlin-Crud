@@ -1,14 +1,13 @@
 package br.com.zup.database.repository
 
 import br.com.zup.database.entity.ToyEntity
-import javax.inject.Singleton
 import com.datastax.oss.driver.api.core.CqlSession
 import com.datastax.oss.driver.api.core.cql.SimpleStatement
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.util.*
-
+import javax.inject.Singleton
 
 @Singleton
 class ToyEntityRepositoryScyllaDB(private val cqlSession: CqlSession) : ToyEntityRepository {
@@ -46,24 +45,21 @@ class ToyEntityRepositoryScyllaDB(private val cqlSession: CqlSession) : ToyEntit
             }.toList()
     }
 
-    override fun findById(id: UUID): Optional<ToyEntity> {
+    override fun findById(id: UUID): ToyEntity? {
         try {
             val selectResult = cqlSession.execute(
                 SimpleStatement
                     .newInstance(
-                        "SELECT * FROM toy.toy WHERE id = ? LIMIT 100",
+                        "SELECT * FROM toy.Toy WHERE id = ? LIMIT 100",
                         id
                     )
             )
-            LOG.info("Toy successfully selected")
-            val result = selectResult.one()?.getString(0)
+            LOG.info("Toy successfully selected {}", selectResult)
 
-            if (result.isNullOrEmpty()) {
-                LOG.error("Sorry! No products found with id", id)
-                return Optional.empty()
-            }
-
-            return Optional.of(ObjectMapper().readValue(result, ToyEntity::class.java))
+            return selectResult
+                .map { toy ->
+                    ToyEntity(toy.getUuid("id")!!, toy.getString("name")!!,
+                        toy.getBigDecimal("price")!!, toy.getString("description")!!) }.firstOrNull()
 
         } catch (error: IllegalStateException) {
             throw IllegalStateException()
@@ -86,10 +82,10 @@ class ToyEntityRepositoryScyllaDB(private val cqlSession: CqlSession) : ToyEntit
         return toyEntity
     }
 
-    override fun delete(toyEntity: ToyEntity) {
+    override fun delete(id: UUID) {
         cqlSession.execute(
             SimpleStatement
-                .newInstance("DELETE from toy.Toy where ID = ?", toyEntity.id)
+                .newInstance("DELETE from toy.Toy where ID = ?", id)
         )
         LOG.info("Toy Deleted!")
     }

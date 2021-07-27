@@ -15,15 +15,10 @@ class ToyEntityService(private val toyEntityRepository: ToyEntityRepository) : T
 
     override fun getAll() = ToyConverter.toListToy(toyEntityRepository.getAll())
 
-    override fun findById(id: UUID) = ToyConverter.toToy(toyEntityRepository.findById(id).orElseThrow())
+    override fun findById(id: UUID) = ToyConverter.toToy(toyEntityRepository.findById(id)!!)
 
-    override fun update(toyEntity: ToyEntity): Toy {
-        val validate = toyEntityRepository.findById(toyEntity.id!!).orElseThrow()
-        return ToyConverter.toToy(toyEntityRepository.update(toyEntity))
-    }
+    override fun update(toyEntity: ToyEntity) = ToyConverter.toToy(toyEntityRepository.update(toyEntity))
 
-    override fun delete(id: UUID) {
-        val toyEntity = toyEntityRepository.findById(id).orElseThrow()
-        toyEntityRepository.delete(toyEntity)
-    }
+    override fun delete(id: UUID) = toyEntityRepository.delete(id)
+
 }

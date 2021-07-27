@@ -6,7 +6,7 @@ import java.util.*
 interface ToyEntityRepository{
     fun save(toyEntity: ToyEntity): ToyEntity
     fun getAll(): List<ToyEntity>
-    fun findById(id: UUID): Optional<ToyEntity>
+    fun findById(id: UUID): ToyEntity?
     fun update(toyEntity: ToyEntity): ToyEntity
-    fun delete(toyEntity: ToyEntity)
+    fun delete(id: UUID)
 }
