@@ -26,7 +26,7 @@ class ToyController(private val toyServicePort: ToyServicePort) {
 
     @Post
     @Tag(name = "Toys")
-    fun create(@Body @Valid dto: ToyDto, post: MutableHttpRequest<ToyDto>) = HttpResponse.created(toyServicePort.create(ToyConverter.toToy(dto)))
+    fun create(@Body @Valid dto: ToyDto) = HttpResponse.created(toyServicePort.create(ToyConverter.toToy(dto)))
 
     @Get
     @Consumes(MediaType.APPLICATION_JSON)

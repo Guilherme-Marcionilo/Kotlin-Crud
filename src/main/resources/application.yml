@@ -2,7 +2,6 @@ micronaut:
   application:
     name: toyProject
   server:
-    context-path: /toy/documentation
     cors:
       enabled: true
   router:
