@@ -39,4 +39,16 @@ class ToyRepositoryScyllaImplTest : AnnotationSpec() {
         result shouldBe toyEntity
     }
 
+    @Test
+    fun `should delete a toy by ID `() {
+        val id = UUID.randomUUID()
+
+        cqlSession.execute(
+            SimpleStatement
+                .newInstance("DELETE from toy.Toy where ID = ?", id)
+        )
+        val result = toyRepository.delete(toyEntity.id!!)
+
+        result shouldBe Unit
+    }
 }
