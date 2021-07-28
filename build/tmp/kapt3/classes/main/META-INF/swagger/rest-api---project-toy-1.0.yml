@@ -1,0 +1,141 @@
+openapi: 3.0.1
+info:
+  title: REST API - Project Toy
+  description: Warrior Project Toy
+  contact:
+    name: TOY
+    url: toy.com.br
+    email: toy@email.com
+  license:
+    name: Apache 2.0
+    url: https://foo.bar
+  version: "1.0"
+servers:
+- url: https://iupp.com.br
+paths:
+  /toy/documentation/toy:
+    get:
+      tags:
+      - Toys
+      operationId: findAllGet
+      parameters: []
+      responses:
+        "200":
+          description: findAllGet 200 response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ToyDto'
+    post:
+      tags:
+      - Toys
+      operationId: createPost
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ToyDto'
+        required: true
+      responses:
+        "200":
+          description: createPost 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Toy'
+  /toy/documentation/toy/{id}:
+    get:
+      tags:
+      - Toys
+      operationId: findToyByIdGet
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: findToyByIdGet 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToyDto'
+    put:
+      tags:
+      - Toys
+      operationId: updatePut
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ToyDto'
+        required: true
+      responses:
+        "200":
+          description: updatePut 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+    delete:
+      tags:
+      - Toys
+      operationId: deleteDelete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: deleteDelete 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+components:
+  schemas:
+    Object:
+      type: object
+    Toy:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+        price:
+          type: number
+        description:
+          type: string
+    ToyDto:
+      required:
+      - description
+      - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+        price:
+          minimum: 0
+          type: number
+        description:
+          minLength: 1
+          type: string

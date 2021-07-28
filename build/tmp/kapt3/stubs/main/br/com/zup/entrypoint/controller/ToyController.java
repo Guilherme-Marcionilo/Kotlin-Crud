@@ -8,6 +8,7 @@ import java.lang.System;
 public class ToyController {
     private final br.com.zup.core.port.ToyServicePort toyServicePort = null;
     
+    @io.swagger.v3.oas.annotations.tags.Tag(name = "Toys")
     @io.micronaut.http.annotation.Post()
     public io.micronaut.http.MutableHttpResponse<br.com.zup.core.model.Toy> create(@org.jetbrains.annotations.NotNull()
     @javax.validation.Valid()
@@ -16,6 +17,7 @@ public class ToyController {
         return null;
     }
     
+    @io.swagger.v3.oas.annotations.tags.Tag(name = "Toys")
     @io.micronaut.http.annotation.Produces(value = {"application/json"})
     @io.micronaut.http.annotation.Consumes(value = {"application/json"})
     @io.micronaut.http.annotation.Get()
@@ -23,6 +25,7 @@ public class ToyController {
         return null;
     }
     
+    @io.swagger.v3.oas.annotations.tags.Tag(name = "Toys")
     @io.micronaut.http.annotation.Get(value = "/{id}")
     public io.micronaut.http.MutableHttpResponse<br.com.zup.entrypoint.dto.ToyDto> findToyById(@org.jetbrains.annotations.NotNull()
     @io.micronaut.http.annotation.PathVariable()
@@ -31,6 +34,7 @@ public class ToyController {
     }
     
     @org.jetbrains.annotations.NotNull()
+    @io.swagger.v3.oas.annotations.tags.Tag(name = "Toys")
     @io.micronaut.http.annotation.Put(value = "/{id}")
     public io.micronaut.http.HttpResponse<java.lang.Object> update(@org.jetbrains.annotations.NotNull()
     @io.micronaut.http.annotation.PathVariable()
@@ -42,6 +46,7 @@ public class ToyController {
     }
     
     @org.jetbrains.annotations.NotNull()
+    @io.swagger.v3.oas.annotations.tags.Tag(name = "Toys")
     @io.micronaut.http.annotation.Delete(value = "/{id}")
     public io.micronaut.http.HttpResponse<java.lang.Object> delete(@org.jetbrains.annotations.NotNull()
     @io.micronaut.http.annotation.PathVariable()

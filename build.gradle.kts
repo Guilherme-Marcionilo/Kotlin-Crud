@@ -43,12 +43,24 @@ dependencies {
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut:micronaut-management")
     implementation("io.micronaut.cassandra:micronaut-cassandra")
+    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    implementation("io.swagger.core.v3:swagger-annotations")
 
+    kaptTest ("io.micronaut:micronaut-inject-java")
+    testImplementation ("io.micronaut.test:micronaut-test-kotest:2.3.3")
+    testImplementation ("io.mockk:mockk:1.10.5")
+    testImplementation ("io.kotest:kotest-runner-junit5-jvm:4.3.0")
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    kapt("io.micronaut.openapi:micronaut-openapi:2.6.0")
 
 }
-
+kapt {
+    arguments {
+        arg("micronaut.openapi.server.context.path", "/toy/documentation")
+        arg("micronaut.openapi.views.spec", "redoc.enabled=true,rapidoc.enabled=true,swagger-ui.enabled=true,swagger-ui.theme=flattop")
+    }
+}
 
 application {
     mainClass.set("br.com.zup.ApplicationKt")
