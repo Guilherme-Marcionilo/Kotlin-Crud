@@ -13,10 +13,10 @@ import java.util.*
 @MicronautTest
 class ToyServiceTest : AnnotationSpec(){
 
-    val toyServicePort = mockk<ToyServicePort>()
+    private val toyServicePort = mockk<ToyServicePort>()
 
-    lateinit var toyEntity: ToyEntity
-    lateinit var toy: Toy
+    private lateinit var toyEntity: ToyEntity
+    private lateinit var toy: Toy
 
     @BeforeEach
     fun setUp() {
