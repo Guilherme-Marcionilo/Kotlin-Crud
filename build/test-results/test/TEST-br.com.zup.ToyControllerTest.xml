@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="br.com.zup.ToyControllerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-07-28T00:46:58" hostname="DESKTOP-6B7DULF" time="0.568">
+<testsuite name="br.com.zup.ToyControllerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-07-28T01:46:54" hostname="DESKTOP-6B7DULF" time="0.566">
   <properties/>
-  <testcase name="create" classname="br.com.zup.ToyControllerTest" time="0.338"/>
-  <testcase name="get" classname="br.com.zup.ToyControllerTest" time="0.203"/>
-  <testcase name="remove" classname="br.com.zup.ToyControllerTest" time="0.004"/>
-  <testcase name="list" classname="br.com.zup.ToyControllerTest" time="0.013"/>
-  <system-out><![CDATA[?[36m21:46:57.186?[0;39m ?[1;30m[kotest-engine-0 @coroutine#3]?[0;39m ?[34mINFO ?[0;39m ?[35mi.m.context.env.DefaultEnvironment?[0;39m - Established active environments: [test]
+  <testcase name="create" classname="br.com.zup.ToyControllerTest" time="0.342"/>
+  <testcase name="get" classname="br.com.zup.ToyControllerTest" time="0.199"/>
+  <testcase name="remove" classname="br.com.zup.ToyControllerTest" time="0.003"/>
+  <testcase name="list" classname="br.com.zup.ToyControllerTest" time="0.01"/>
+  <system-out><![CDATA[?[36m22:46:53.221?[0;39m ?[1;30m[kotest-engine-0 @coroutine#3]?[0;39m ?[34mINFO ?[0;39m ?[35mi.m.context.env.DefaultEnvironment?[0;39m - Established active environments: [test]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

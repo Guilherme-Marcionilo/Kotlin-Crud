@@ -18,7 +18,6 @@ import java.util.*
 class ToyControllerTest() : StringSpec({
 
     clearAllMocks()
-
     val createToy: ToyServicePort = ToyServiceImpl(mockk(relaxed = true))
 
     val toyDto = ToyDto(
@@ -28,7 +27,6 @@ class ToyControllerTest() : StringSpec({
     )
 
     val toyController = ToyController(createToy)
-
 
     "create" {
         toyController.create(toyDto, HttpRequest.POST(toString(), toyDto)).code() shouldBe 201
