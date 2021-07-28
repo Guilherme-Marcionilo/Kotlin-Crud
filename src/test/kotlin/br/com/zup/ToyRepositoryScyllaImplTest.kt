@@ -4,6 +4,7 @@ import br.com.zup.database.entity.ToyEntity
 import br.com.zup.database.repository.ToyEntityRepositoryScyllaImpl
 import com.datastax.oss.driver.api.core.CqlSession
 import com.datastax.oss.driver.api.core.cql.SimpleStatement
+import com.datastax.oss.driver.shaded.guava.common.base.CharMatcher.any
 import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.matchers.shouldBe
 import io.micronaut.test.extensions.kotest.annotation.MicronautTest
@@ -50,5 +51,21 @@ class ToyRepositoryScyllaImplTest : AnnotationSpec() {
         val result = toyRepository.delete(toyEntity.id!!)
 
         result shouldBe Unit
+    }
+
+    @Test
+    fun `should update a toy`() {
+        cqlSession.execute(
+            SimpleStatement
+                .newInstance(
+                    "UPDATE toy.Toy SET name = ?, price = ?, description = ? WHERE id = ?",
+                    toyEntity.name,
+                    toyEntity.price,
+                    toyEntity.description,
+                    toyEntity.id
+                )
+        )
+        val result = toyRepository.update(toyEntity)
+        result shouldBe toyEntity
     }
 }
