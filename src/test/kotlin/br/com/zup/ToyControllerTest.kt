@@ -1,40 +1,35 @@
-//package br.com.zup
-//
-//import br.com.zup.model.Toy
-//import br.com.zup.repository.ToyRepository
-//import br.com.zup.model.ToyDto
-//import io.kotest.core.spec.style.AnnotationSpec
-//import io.micronaut.test.extensions.kotest.annotation.MicronautTest
-//import io.mockk.MockKAnnotations
-//import io.mockk.impl.annotations.InjectMockKs
-//import io.mockk.impl.annotations.MockK
-//import io.mockk.mockk
-//
-//
-//@MicronautTest
-//class ToyControllerTest: AnnotationSpec() {
-//
-//    @InjectMockKs
-//    private val toyRepository = mockk<ToyRepository>(relaxed = true)
-//
-//    @MockK
-//    private lateinit var toyDto: ToyDto
-//    @MockK
-//    private lateinit var toy: Toy
-//
-//    @BeforeEach
-//    fun setUp() {
-//        MockKAnnotations.init(this)
-//        toyDto = ToyDto("Brinquedo", 12.90)
-//    }
-//
-//    @Test
-//    fun `should return toy with success`() {
-//
-//        toy = Toy("Brinquedo", 12.90)
-//
-//        val result = toyDto.toModel()
-//
-//        result.id shouldBe toy.id
-//    }
-//}
+package br.com.zup
+
+import br.com.zup.core.port.ToyServicePort
+import br.com.zup.core.service.ToyServiceImpl
+import br.com.zup.entrypoint.controller.ToyController
+import br.com.zup.entrypoint.dto.ToyDto
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
+import io.micronaut.http.HttpRequest
+import io.micronaut.test.extensions.kotest.annotation.MicronautTest
+import io.mockk.clearAllMocks
+import io.mockk.mockk
+import java.math.BigDecimal
+
+@MicronautTest
+class ToyControllerTest() : StringSpec ({
+
+    clearAllMocks()
+
+    val createToy: ToyServicePort = ToyServiceImpl(mockk(relaxed = true))
+
+    val toyDto = ToyDto(
+        name = "TesteKotest",
+        price = BigDecimal.ONE,
+        description = "DescTest"
+    )
+
+    val toyController = ToyController(createToy)
+
+
+    "create" {
+        toyController.create(toyDto, HttpRequest.POST(toString(), toyDto)).code() shouldBe 201
+    }
+
+})

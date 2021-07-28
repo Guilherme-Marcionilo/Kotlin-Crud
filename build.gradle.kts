@@ -48,7 +48,7 @@ dependencies {
 
     kaptTest ("io.micronaut:micronaut-inject-java")
     testImplementation ("io.micronaut.test:micronaut-test-kotest:2.3.3")
-    testImplementation ("io.mockk:mockk:1.10.5")
+    testImplementation ("io.mockk:mockk:1.10.6")
     testImplementation ("io.kotest:kotest-runner-junit5-jvm:4.3.0")
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
